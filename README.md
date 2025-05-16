@@ -65,13 +65,14 @@ The hyperparameters are specified in `scripts/MangaLMM.sh`. We used four A100 GP
 
 ## Evaluation
 
-The evaluation of the MangaLMM model on MangaOCR takes over 10 hours on a single A100 GPU, but only several hours when using the script below with the parallel command.
+The inference of the MangaLMM model on MangaOCR takes over 10 hours on a single A100 GPU, but only several hours when using the script below with the parallel command.
 
 
 ```sh
 apt install parallel # this command only needs to be run once
-sh scripts/evaluate_OCR.sh ./outputs/MangaLMM 4  # for 4GPU
+sh scripts/inference_OCR.sh ./outputs/MangaLMM 4  # for 4GPU
 ```
+Once the script above completes, you can run `evaluation/eval_OCR.ipynb` to evaluate the OCR performance. <br> 
 
 
 To evaluate the MangaLMM model on MangaVQA, run:
@@ -95,8 +96,9 @@ To evaluate the pretrained MangaLMM model on MangaOCR, run:
 
 ```sh
 apt install parallel # this command only needs to be run once
-sh scripts/evaluate_OCR.sh hal-utokyo/MangaLMM 4  # for 4GPU
+sh scripts/inference_OCR.sh hal-utokyo/MangaLMM 4  # for 4GPU
 ```
+Once the script above completes, you can run `evaluation/eval_OCR.ipynb` to evaluate the OCR performance. <br> 
 
 To evaluate the pretrained MangaLMM model on MangaVQA, run:
 
