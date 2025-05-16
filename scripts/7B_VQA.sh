@@ -1,0 +1,33 @@
+# Set max pixels to 2116800 (60 x 45 x 28 x 28)
+WANDB_PROJECT=MangaLMM deepspeed --include localhost:0,1,2,3 src/qwen25vl_ft.py \
+    --output_dir outputs/7B_VQA \
+    --deepspeed config/deepspeed_zero2.json \
+    --base_model Qwen/Qwen2.5-VL-7B-Instruct \
+    --data_path ./data/mangavqa_train.jsonl \
+    --image_dir ./data \
+    --min_pixels 3136 \
+    --max_pixels 2116800 \
+    --bf16 True \
+    --tf32 True \
+    --do_train True \
+    --num_train_epochs 1 \
+    --per_device_train_batch_size 1 \
+    --gradient_accumulation_steps 8 \
+    --do_eval False \
+    --per_device_eval_batch_size 4 \
+    --freeze_llm False \
+    --learning_rate 1e-5 \
+    --freeze_merger False \
+    --merger_lr 1e-5 \
+    --freeze_visual False \
+    --visual_lr 1e-5 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 1 \
+    --save_strategy="no" \
+    --seed 42 \
+    --data_seed 42 \
+    --dataloader_num_workers 4 \
+    --gradient_checkpointing True \
+    --use_flash_attn2 True \
+    --report_to wandb \
+    --run_name Qwen2.5-VL-7B-Instruct-FT-VQA
